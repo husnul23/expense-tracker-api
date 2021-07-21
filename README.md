@@ -1,24 +1,26 @@
 # expense-tracker-api
 
-REST API for tracking expenses.
+# REST API for tracking expenses.
 
 A RESTful API created using Spring Boot. We have used PostgreSQL as the relational database and JdbcTemplate to interact with that. Apart from this, we have used JSON Web Token (JWT) to add authentication. Using JWT, we can protect certain endpoints and ensure that user must be logged-in to access those.
 
 Here are all the videos where we have created this API from scratch - Youtube Playlist
 
-Setup and Installation
-Clone the repo from GitHub
+# Setup and Installation
+1. Clone the repo from GitHub
 
 git clone https://github.com/pairlearning/expense-tracker-api.git
 cd expense-tracker-api
-Spin-up PostgreSQL database instance
+
+2. Spin-up PostgreSQL database instance
 
 You can use either of the below 2 options:
 
 one way is to download from here and install locally on the machine
 another option is by running a postgres docker container:
 docker container run --name postgresdb -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres
-Create database objects
+
+3. Create database objects
 
 In the root application directory (expense-tracker-api), SQL script file (expensetracker_db.sql) is present for creating all database objects
 
@@ -27,14 +29,15 @@ docker container cp expensetracker_db.sql postgresdb:/
 docker container exec -it postgresdb bash
 run the script using psql client:
 psql -U postgres --file expensetracker_db.sql
-(Optional) Update database configurations in application.properties
+
+4. (Optional) Update database configurations in application.properties
 
 If your database is hosted at some cloud platform or if you have modified the SQL script file with some different username and password, update the src/main/resources/application.properties file accordingly:
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/expensetrackerdb
 spring.datasource.username=expensetracker
 spring.datasource.password=password
-Run the spring boot application
+5. Run the spring boot application
 
 ./mvnw spring-boot:run
 this runs at port 8080 and hence all enpoints can be accessed starting from http://localhost:8080
