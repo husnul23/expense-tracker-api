@@ -17,6 +17,15 @@ public class TransactionResource {
     @Autowired
     TransactionService transactionService;
 
+    @GetMapping("{transactionId}")
+    public ResponseEntity<Transaction> getTransactionById(HttpServletRequest request,
+                                                          @PathVariable("categoryId") Integer categoryId,
+                                                          @PathVariable("transactionId") Integer transactionId) {
+        int userId = (Integer) request.getAttribute("userId");
+        Transaction transaction = transactionService.fetchTransactionById(userId, categoryId, transactionId);
+        return new ResponseEntity<>(transaction, HttpStatus.OK);
+    }
+
     @PostMapping("")
     public ResponseEntity<Transaction> addTransaction(HttpServletRequest request,
                                                       @PathVariable("categoryId") Integer categoryId,
