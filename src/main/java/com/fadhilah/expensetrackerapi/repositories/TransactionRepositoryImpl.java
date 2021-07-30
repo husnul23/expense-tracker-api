@@ -67,7 +67,12 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public void update(Integer userId, Integer categoryId, Integer transactionId, Transaction transaction) throws EtBadRequestException {
-
+        try {
+            jdbcTemplate.update(SQL_UPDATE, transaction.getAmount(), transaction.getNote(),
+                    transaction.getTransactionDate(), userId, categoryId, transactionId);
+        } catch (Exception e) {
+            throw new EtBadRequestException("Invalid Request");
+        }
     }
 
     @Override
@@ -75,7 +80,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     }
 
-    private RowMapper<Transaction> transactionRowMapper = ((rs, rowNum) -> {
+    private final RowMapper<Transaction> transactionRowMapper = ((rs, rowNum) -> {
         return new Transaction(rs.getInt("TRANSACTION_ID"),
                 rs.getInt("CATEGORY_ID"),
                 rs.getInt("USER_ID"),
