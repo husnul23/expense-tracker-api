@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,6 +17,14 @@ public class TransactionResource {
 
     @Autowired
     TransactionService transactionService;
+
+    @GetMapping("")
+    public ResponseEntity<List<Transaction>> getAllTransactions(HttpServletRequest request,
+                                                                @PathVariable("categoryId") Integer categoryId) {
+        int userId = (Integer) request.getAttribute("userId");
+        List<Transaction> transactions = transactionService.fetchAllTransactions(userId, categoryId);
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
 
     @GetMapping("{transactionId}")
     public ResponseEntity<Transaction> getTransactionById(HttpServletRequest request,
