@@ -60,7 +60,7 @@ public class TransactionResource {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @DeleteMapping("/transactionId")
+    @DeleteMapping("/{transactionId}")
     public ResponseEntity<Map<String, Boolean>> deleteTransaction(HttpServletRequest request,
                                                                   @PathVariable("categoryId") Integer categoryId,
                                                                   @PathVariable("transactionId") Integer transactionId) {
