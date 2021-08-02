@@ -1,7 +1,7 @@
 package com.fadhilah.expensetrackerapi;
 
 import com.fadhilah.expensetrackerapi.filters.AuthFilter;
-import org.apache.catalina.filters.CorsFilter;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -26,7 +26,7 @@ public class ExpenseTrackerApiApplication {
 		config.addAllowedHeader("*");
 		// allow for any path
 		source.registerCorsConfiguration("/**", config);
-		registrationBean.setFilter(new CorsFilter());
+		registrationBean.setFilter(new CorsFilter(source));
 		registrationBean.setOrder(0);
 		return registrationBean;
 	}
